@@ -70,6 +70,8 @@ function return_btn() {
 function next_btn() {
     var new_text_cont = document.getElementById('new_text');
     result[keys[iterator]] = new_text_cont.value;
+    new_text_cont.value = "";
+    new_text_cont.focus();
 
     //cambiar next por end antes del último paso, y luego que desaparezca.
 
