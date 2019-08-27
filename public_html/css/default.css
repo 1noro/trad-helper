@@ -112,10 +112,39 @@ body {
 
 #actual_text_td {
     /* background-color: #c0c0c0; */
+    position: relative;
 }
 
 #actual_text {
     font-weight: bold;
+    font-size: 25px;
+    z-index: 3;
+}
+
+#acopy_bt_td {
+    background-color: #005d8d;
+}
+
+/*############################################################################*/
+/*la mayoria de parametros se pueden eliminar ya que el elemento no se mostrará*/
+#actual_text_cont {
+    opacity: 0; /*muy importante*/
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 1px;
+    padding-left: 5px;
+    /* background-color: green; */
+}
+
+#actual_text_cp {
+    border: none;
+    padding: 0px;
+    /* background-color: grey; */
+    width: 100%;
+    font-size: 8px;
+    z-index: 2;
 }
 
 /*############################################################################*/

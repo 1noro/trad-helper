@@ -44,10 +44,13 @@ function set_phrase() {
     var
         actual_key_cont = document.getElementById('actual_key'),
         actual_text_cont = document.getElementById('actual_text'),
+        actual_text_cp_cont = document.getElementById('actual_text_cp'),
         output_cont = document.getElementById('output');
     actual_key_cont.innerText = keys[iterator];
     actual_text_cont.innerText = phrases[keys[iterator]];
+    actual_text_cp_cont.value = phrases[keys[iterator]];
     output_cont.value = JSON.stringify(result, null, 4);
+    output_cont.scrollTop = output_cont.scrollHeight;
 }
 
 function begin_btn() {
@@ -87,14 +90,27 @@ function next_btn() {
     } else if (iterator == keys.length) {
         var output_cont = document.getElementById('output');
         console.log('[INFO] Fin');
-        next_bt.innerText = "ENDED!!";
-        next_bt.style.cursor = "default";
+        // next_bt.innerText = "ENDED!!";
+        // next_bt.style.cursor = "default";
+        next_bt.style.display = "none";
         output_cont.value = JSON.stringify(result, null, 4);
     }
 }
 
 function copy_btn() {
-    console.log('copy...');
+    /* Get the text field from an input obj*/
+    var copyText = document.getElementById("actual_text_cp");
+
+    /* Select the text field */
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+    /* Copy the text inside the text field */
+    document.execCommand("copy");
+
+    /* Alert the copied text */
+    console.log("Copied the text: '" + copyText.value + "'");
+    document.getElementById('new_text').focus();
 }
 
 function check_intro(e) {
