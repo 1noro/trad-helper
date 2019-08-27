@@ -12,6 +12,7 @@
         <link href="css/font_faces.css" rel="stylesheet">
         <link href="css/default.css" rel="stylesheet">
 
+        <script src="js/utils.js"></script>
         <script src="js/main.js"></script>
 	</head>
 
@@ -20,11 +21,11 @@
 		<div id="full_cont">
 			<h2>TRAD_HELPER</h2>
 
-			<div id="input_cont" class="plegable_textarea_container">
+			<div id="input_cont" class="plegable_textarea_container start_visible">
 				<textarea id="input" name="input" placeholder="input_json"></textarea>
 			</div>
 
-			<div id="begin_bt" class="my_button">
+			<div id="begin_bt" class="my_button start_visible" onclick="begin();">
 				BEGIN
 			</div>
 
@@ -32,25 +33,27 @@
 				RETURN
 			</div>
 
-			<table id="control_table" class="full_width_table start_hidden" border="0">
-				<tr>
-					<td id="actual_key_td" class="td15">
-						<div id="actual_key" class="">
-							actual_key
-						</div>
-					</td>
-					<td id="actual_text_td" class="">
-						<div id="actual_text" class="">
-							actual_text
-						</div>
-					</td>
-					<td class="td25">
-						<div id="copy_bt" class="my_button">
-							COPY
-						</div>
-					</td>
-				</tr>
-			</table>
+			<div class="start_hidden">
+				<table id="control_table" class="full_width_table" border="0">
+					<tr>
+						<td id="actual_key_td" class="td15">
+							<div id="actual_key" class="">
+								actual_key
+							</div>
+						</td>
+						<td id="actual_text_td" class="">
+							<div id="actual_text" class="">
+								actual_text
+							</div>
+						</td>
+						<td class="td25">
+							<div id="copy_bt" class="my_button">
+								COPY
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
 
 			<div id="new_text_cont" class="plegable_textarea_container start_hidden">
 				<textarea id="new_text" name="new_text" placeholder="traduction"></textarea>

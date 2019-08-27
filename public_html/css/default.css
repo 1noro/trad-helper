@@ -23,6 +23,10 @@ body {
     height: 700px;
 }
 
+#output {
+    height: 500px;
+}
+
 /*############################################################################*/
 .plegable_textarea_container {
     /* background-color: green; */
