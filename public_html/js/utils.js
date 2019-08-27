@@ -68,8 +68,10 @@ function return_btn() {
 }
 
 function next_btn() {
-    var new_text_cont = document.getElementById('new_text');
-    result[keys[iterator]] = new_text_cont.value;
+    var
+        new_text_cont = document.getElementById('new_text'),
+        next_bt = document.getElementById('next_bt');
+    result[keys[iterator]] = new_text_cont.value.replace(/\n$/, "");
     new_text_cont.value = "";
     new_text_cont.focus();
 
@@ -79,13 +81,26 @@ function next_btn() {
 
     if (iterator < keys.length) {
         set_phrase();
+        if ((iterator+1) == keys.length) {
+            next_bt.innerText = "END";
+        }
     } else if (iterator == keys.length) {
         var output_cont = document.getElementById('output');
         console.log('[INFO] Fin');
+        next_bt.innerText = "ENDED!!";
+        next_bt.style.cursor = "default";
         output_cont.value = JSON.stringify(result, null, 4);
     }
 }
 
 function copy_btn() {
     console.log('copy...');
+}
+
+function check_intro(e) {
+    if (e.keyCode == 13) {
+        if (!e.shiftKey) {
+            next_btn();
+        }
+    }
 }
