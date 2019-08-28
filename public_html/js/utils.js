@@ -30,6 +30,15 @@ function check_intro(e) {
     }
 }
 
+function is_json_string(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
 /*############################################################################*/
 function begin_btn_gchanges() {
     document.getElementById('input_cont').style.display = "none";
@@ -78,7 +87,7 @@ function continue_btn_gchanges() {
 function begin_btn() {
     var json = document.getElementById('input').value;
 
-    if (JSON.parse(json)) {
+    if (is_json_string(json)) {
         phrases = JSON.parse(json)['english'];
         keys = Object.keys(phrases);
         result["espanol"] = {};
@@ -86,7 +95,7 @@ function begin_btn() {
         begin_btn_gchanges();
         document.getElementById('input').readOnly = true;
     } else {
-        console.log('[FAIL] Thre is no json text in the input.');
+        console.log('[FAIL] Thre is no JSON text in the input.');
     }
 }
 
