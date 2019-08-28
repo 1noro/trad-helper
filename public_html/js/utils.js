@@ -9,40 +9,6 @@ var
     phrases = [],
     result = {};
 
-// function switch_visible() {
-//     var
-//         objs_visible = document.getElementsByClassName("start_visible"),
-//         objs_hidden = document.getElementsByClassName("start_hidden");
-//
-//     if (switch_visible_status == true) {
-//         var i = 0;
-//         while (i < objs_visible.length) {
-//             objs_visible[i].style.display = "none";
-//             i++;
-//         }
-//
-//         i = 0;
-//         while (i < objs_hidden.length) {
-//             objs_hidden[i].style.display = "block";
-//             i++;
-//         }
-//         switch_visible_status = false;
-//     } else {
-//         var i = 0;
-//         while (i < objs_visible.length) {
-//             objs_visible[i].style.display = "block";
-//             i++;
-//         }
-//
-//         i = 0;
-//         while (i < objs_hidden.length) {
-//             objs_hidden[i].style.display = "none";
-//             i++;
-//         }
-//         switch_visible_status = true;
-//     }
-// }
-
 function set_phrase() {
     var
         actual_key_cont = document.getElementById('actual_key'),
@@ -103,6 +69,8 @@ function continue_btn_gchanges() {
         begin_btn_gchanges();
     } else {
         end_btn_gchanges();
+        var output_cont = document.getElementById('output');
+        output_cont.scrollTop = output_cont.scrollHeight;
     }
 }
 
@@ -116,8 +84,6 @@ function begin_btn() {
         result["espanol"] = {};
         set_phrase();
         begin_btn_gchanges();
-        // document.getElementById('begin_bt').style.display = "none";
-        // document.getElementById('next_bt').style.display = "block";
         document.getElementById('input').readOnly = true;
     } else {
         console.log('[FAIL] Thre is no json text in the input.');
@@ -126,17 +92,11 @@ function begin_btn() {
 
 /*############################################################################*/
 function continue_btn() {
-    // switch_visible();
-    // document.getElementById('continue_bt').style.display = "none";
-    // (iterator < keys.length)?document.getElementById('next_bt').style.display = "block":0;
     continue_btn_gchanges();
 }
 
 /*############################################################################*/
 function return_btn() {
-    // switch_visible();
-    // document.getElementById('continue_bt').style.display = "block";
-    // document.getElementById('next_bt').style.display = "none";
     return_btn_gchanges();
 }
 
@@ -159,9 +119,6 @@ function next_btn() {
     } else if (iterator == keys.length) {
         var output_cont = document.getElementById('output');
         console.log('[INFO] Fin');
-        // next_bt.innerText = "ENDED!!"; //este cambio es inutil porquees invisible
-        // next_bt.style.cursor = "default"; //este cambio es inutil porquees invisible
-        // next_bt.style.display = "none";
         end_btn_gchanges();
         output_cont.value = JSON.stringify(result, null, 4);
     }
@@ -169,17 +126,10 @@ function next_btn() {
 
 /*############################################################################*/
 function copy_btn() {
-    /* Get the text field from an input obj*/
     var copyText = document.getElementById("actual_text_cp");
-
-    /* Select the text field */
     copyText.select();
     copyText.setSelectionRange(0, 99999); /*For mobile devices*/
-
-    /* Copy the text inside the text field */
     document.execCommand("copy");
-
-    /* Alert the copied text */
     console.log("Copied the text: '" + copyText.value + "'");
     document.getElementById('new_text').focus();
 }
