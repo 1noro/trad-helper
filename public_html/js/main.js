@@ -1,4 +1,4 @@
 
 function main() {
-    console.log("Start...");
+    console.log("[MAIN] Start...");
 }

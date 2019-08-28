@@ -104,10 +104,12 @@ function return_btn() {
 function next_btn() {
     var
         new_text_cont = document.getElementById('new_text'),
-        next_bt = document.getElementById('next_bt');
-    result["espanol"][keys[iterator]] = new_text_cont.value.replace(/\n$/, "");
+        next_bt = document.getElementById('next_bt'),
+        new_text = new_text_cont.value.replace(/\n$/, "");
+    result["espanol"][keys[iterator]] = new_text;
     new_text_cont.value = "";
     new_text_cont.focus();
+    console.log("[ ++ ] "+keys[iterator]+": "+new_text);
 
     iterator++;
 
@@ -118,7 +120,7 @@ function next_btn() {
         }
     } else if (iterator == keys.length) {
         var output_cont = document.getElementById('output');
-        console.log('[INFO] Fin');
+        console.log('[INFO] End.');
         end_btn_gchanges();
         output_cont.value = JSON.stringify(result, null, 4);
     }
@@ -130,6 +132,6 @@ function copy_btn() {
     copyText.select();
     copyText.setSelectionRange(0, 99999); /*For mobile devices*/
     document.execCommand("copy");
-    console.log("Copied the text: '" + copyText.value + "'");
+    console.log("[COPY] Text: '" + copyText.value + "'");
     document.getElementById('new_text').focus();
 }

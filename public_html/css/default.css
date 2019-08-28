@@ -5,12 +5,13 @@ body {
     margin: 0px;
     font-size: 17px;
     font-family: "My Courier New", "Courier New";
-    background-color: #cbcbcb;
+    /* background-color: #cbcbcb; */
+    background-color: #ffffff;
 }
 
 /*############################################################################*/
 #full_cont {
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     min-width: 280px;
     width: auto;
     margin: 10px;
