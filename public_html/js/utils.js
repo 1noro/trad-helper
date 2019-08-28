@@ -74,6 +74,7 @@ function begin_btn() {
         switch_visible();
         document.getElementById('begin_bt').style.display = "none";
         document.getElementById('next_bt').style.display = "block";
+        document.getElementById('input').readOnly = true;
     } else {
         console.log('[FAIL] Thre is no json text in the input.');
     }
