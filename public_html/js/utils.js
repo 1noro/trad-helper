@@ -169,12 +169,11 @@ function copy_down_btn() {
 function check_intro(e) {
     if (e.keyCode == 13) {
         if (e.ctrlKey) {
-            console.log('hola');
             copy_down_btn();
             next_btn();
         } else if (!e.shiftKey) {
             next_btn();
-        } 
+        }
     }
 }
 
