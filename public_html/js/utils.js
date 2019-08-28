@@ -9,39 +9,39 @@ var
     phrases = [],
     result = {};
 
-function switch_visible() {
-    var
-        objs_visible = document.getElementsByClassName("start_visible"),
-        objs_hidden = document.getElementsByClassName("start_hidden");
-
-    if (switch_visible_status == true) {
-        var i = 0;
-        while (i < objs_visible.length) {
-            objs_visible[i].style.display = "none";
-            i++;
-        }
-
-        i = 0;
-        while (i < objs_hidden.length) {
-            objs_hidden[i].style.display = "block";
-            i++;
-        }
-        switch_visible_status = false;
-    } else {
-        var i = 0;
-        while (i < objs_visible.length) {
-            objs_visible[i].style.display = "block";
-            i++;
-        }
-
-        i = 0;
-        while (i < objs_hidden.length) {
-            objs_hidden[i].style.display = "none";
-            i++;
-        }
-        switch_visible_status = true;
-    }
-}
+// function switch_visible() {
+//     var
+//         objs_visible = document.getElementsByClassName("start_visible"),
+//         objs_hidden = document.getElementsByClassName("start_hidden");
+//
+//     if (switch_visible_status == true) {
+//         var i = 0;
+//         while (i < objs_visible.length) {
+//             objs_visible[i].style.display = "none";
+//             i++;
+//         }
+//
+//         i = 0;
+//         while (i < objs_hidden.length) {
+//             objs_hidden[i].style.display = "block";
+//             i++;
+//         }
+//         switch_visible_status = false;
+//     } else {
+//         var i = 0;
+//         while (i < objs_visible.length) {
+//             objs_visible[i].style.display = "block";
+//             i++;
+//         }
+//
+//         i = 0;
+//         while (i < objs_hidden.length) {
+//             objs_hidden[i].style.display = "none";
+//             i++;
+//         }
+//         switch_visible_status = true;
+//     }
+// }
 
 function set_phrase() {
     var
@@ -64,33 +64,88 @@ function check_intro(e) {
     }
 }
 
+/*############################################################################*/
+function begin_btn_gchanges() {
+    document.getElementById('input_cont').style.display = "none";
+    document.getElementById('begin_bt').style.display = "none";
+    document.getElementById('continue_bt').style.display = "none";
+    document.getElementById('return_bt').style.display = "block";
+    document.getElementById('control_table_div').style.display = "block";
+    document.getElementById('new_text_cont').style.display = "block";
+    document.getElementById('next_bt').style.display = "block";
+    document.getElementById('output_cont').style.display = "block";
+}
+
+function return_btn_gchanges() {
+    document.getElementById('input_cont').style.display = "block";
+    document.getElementById('begin_bt').style.display = "none";
+    document.getElementById('continue_bt').style.display = "block";
+    document.getElementById('return_bt').style.display = "none";
+    document.getElementById('control_table_div').style.display = "none";
+    document.getElementById('new_text_cont').style.display = "none";
+    document.getElementById('next_bt').style.display = "none";
+    document.getElementById('output_cont').style.display = "none";
+}
+
+function end_btn_gchanges() {
+    document.getElementById('input_cont').style.display = "none";
+    document.getElementById('begin_bt').style.display = "none";
+    document.getElementById('continue_bt').style.display = "none";
+    document.getElementById('return_bt').style.display = "block";
+    document.getElementById('control_table_div').style.display = "none";
+    document.getElementById('new_text_cont').style.display = "none";
+    document.getElementById('next_bt').style.display = "none";
+    document.getElementById('output_cont').style.display = "block";
+}
+
+function continue_btn_gchanges() {
+    if (iterator < keys.length) {
+        begin_btn_gchanges();
+    } else {
+        end_btn_gchanges();
+    }
+}
+
+/*############################################################################*/
 function begin_btn() {
     var json = document.getElementById('input').value;
 
     if (JSON.parse(json)) {
         phrases = JSON.parse(json)['english'];
         keys = Object.keys(phrases);
+        result["espanol"] = {};
         set_phrase();
-        switch_visible();
-        document.getElementById('begin_bt').style.display = "none";
-        document.getElementById('next_bt').style.display = "block";
+        begin_btn_gchanges();
+        // document.getElementById('begin_bt').style.display = "none";
+        // document.getElementById('next_bt').style.display = "block";
         document.getElementById('input').readOnly = true;
     } else {
         console.log('[FAIL] Thre is no json text in the input.');
     }
 }
 
-function return_btn() {
-    switch_visible();
-    document.getElementById('continue_bt').style.display = "block";
-    document.getElementById('next_bt').style.display = "none";
+/*############################################################################*/
+function continue_btn() {
+    // switch_visible();
+    // document.getElementById('continue_bt').style.display = "none";
+    // (iterator < keys.length)?document.getElementById('next_bt').style.display = "block":0;
+    continue_btn_gchanges();
 }
 
+/*############################################################################*/
+function return_btn() {
+    // switch_visible();
+    // document.getElementById('continue_bt').style.display = "block";
+    // document.getElementById('next_bt').style.display = "none";
+    return_btn_gchanges();
+}
+
+/*############################################################################*/
 function next_btn() {
     var
         new_text_cont = document.getElementById('new_text'),
         next_bt = document.getElementById('next_bt');
-    result[keys[iterator]] = new_text_cont.value.replace(/\n$/, "");
+    result["espanol"][keys[iterator]] = new_text_cont.value.replace(/\n$/, "");
     new_text_cont.value = "";
     new_text_cont.focus();
 
@@ -104,13 +159,15 @@ function next_btn() {
     } else if (iterator == keys.length) {
         var output_cont = document.getElementById('output');
         console.log('[INFO] Fin');
-        next_bt.innerText = "ENDED!!"; //este cambio es inutil porquees invisible
-        next_bt.style.cursor = "default"; //este cambio es inutil porquees invisible
-        next_bt.style.display = "none";
+        // next_bt.innerText = "ENDED!!"; //este cambio es inutil porquees invisible
+        // next_bt.style.cursor = "default"; //este cambio es inutil porquees invisible
+        // next_bt.style.display = "none";
+        end_btn_gchanges();
         output_cont.value = JSON.stringify(result, null, 4);
     }
 }
 
+/*############################################################################*/
 function copy_btn() {
     /* Get the text field from an input obj*/
     var copyText = document.getElementById("actual_text_cp");
@@ -125,10 +182,4 @@ function copy_btn() {
     /* Alert the copied text */
     console.log("Copied the text: '" + copyText.value + "'");
     document.getElementById('new_text').focus();
-}
-
-function continue_btn() {
-    switch_visible();
-    document.getElementById('continue_bt').style.display = "none";
-    (iterator < keys.length)?document.getElementById('next_bt').style.display = "block":0;
 }
