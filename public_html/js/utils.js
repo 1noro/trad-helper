@@ -115,7 +115,7 @@ function next_btn() {
         new_text_cont = document.getElementById('new_text'),
         next_bt = document.getElementById('next_bt'),
         // new_text = new_text_cont.value.replace(/\n$/, ""),
-        new_text = new_text_cont.value.replace('\n', ""),
+        new_text = new_text_cont.value.replace(/\n/g, ""),
         output_cont = document.getElementById('output');
 
     if (is_json_string(output_cont.value)) {
@@ -172,7 +172,10 @@ function check_intro(e) {
         if (e.ctrlKey) {
             copy_down_btn();
             next_btn();
-        } else if (!e.shiftKey) {
+        // } else if (!e.shiftKey) {
+        //     next_btn();
+        // }
+        } else {
             next_btn();
         }
     }
