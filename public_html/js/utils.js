@@ -114,7 +114,8 @@ function next_btn() {
     var
         new_text_cont = document.getElementById('new_text'),
         next_bt = document.getElementById('next_bt'),
-        new_text = new_text_cont.value.replace(/\n$/, ""),
+        // new_text = new_text_cont.value.replace(/\n$/, ""),
+        new_text = new_text_cont.value.replace('\n', ""),
         output_cont = document.getElementById('output');
 
     if (is_json_string(output_cont.value)) {
