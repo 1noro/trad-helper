@@ -22,14 +22,6 @@ function set_phrase() {
     output_cont.scrollTop = output_cont.scrollHeight;
 }
 
-function check_intro(e) {
-    if (e.keyCode == 13) {
-        if (!e.shiftKey) {
-            next_btn();
-        }
-    }
-}
-
 function is_json_string(str) {
     try {
         JSON.parse(str);
@@ -161,4 +153,30 @@ function copy_btn() {
     document.execCommand("copy");
     console.log("[COPY] Text: '" + copyText.value + "'");
     document.getElementById('new_text').focus();
+}
+
+/*############################################################################*/
+function copy_down_btn() {
+    var new_text_cont = document.getElementById('new_text');
+    // new_text_cont.value += phrases[keys[iterator]];
+    new_text_cont.value = phrases[keys[iterator]];
+    console.log("[CPDW] Text: '" + phrases[keys[iterator]] + "'");
+    new_text_cont.focus();
+}
+
+/*############################################################################*/
+function check_intro(e) {
+    if (e.keyCode == 13) {
+        if (!e.shiftKey) {
+            next_btn();
+        }
+    }
+}
+
+function check_copy_click(e) {
+    if (e.button == 0) {
+        copy_btn();
+    } else if (e.button == 1 || e.button == 2) {
+        copy_down_btn();
+    }
 }
