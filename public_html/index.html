@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- index.html -->
+<!-- (c) inoro 2019 GPL v3 -->
 <html>
 
 	<head>
@@ -25,8 +27,12 @@
 				<textarea id="input" name="input" placeholder="input_json"></textarea>
 			</div>
 
-			<div id="begin_bt" class="my_button start_visible" onclick="begin_btn();">
+			<div id="begin_bt" class="my_button" onclick="begin_btn();">
 				BEGIN
+			</div>
+
+			<div id="continue_bt" class="my_button" onclick="continue_btn();">
+				CONTINUE
 			</div>
 
 			<div id="return_bt" class="my_button start_hidden" onclick="return_btn();">
@@ -62,7 +68,7 @@
 				<textarea id="new_text" name="new_text" placeholder="traduction" onkeyup="check_intro(event);"></textarea>
 			</div>
 
-			<div id="next_bt" class="my_button start_hidden" onclick="next_btn();">
+			<div id="next_bt" class="my_button" onclick="next_btn();">
 				NEXT
 			</div>
 

@@ -1,4 +1,5 @@
-/*defaul.css*/
+/* defaul.css */
+/* (c) inoro 2019 GPL v3 */
 
 body {
     margin: 0px;
@@ -94,11 +95,16 @@ body {
 
 #next_bt {
     background-color: #55A660;
+    display: none;
 }
 
 #next_bt:active {
     color: #000000;
     background-color: #48c058;
+}
+
+#continue_bt {
+    display: none;
 }
 
 /*############################################################################*/

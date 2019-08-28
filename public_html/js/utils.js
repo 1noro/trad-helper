@@ -1,3 +1,6 @@
+// utils.js
+// (c) inoro 2019 GPL v3
+// debería ordenar el código
 
 var
     switch_visible_status = true,
@@ -53,6 +56,14 @@ function set_phrase() {
     output_cont.scrollTop = output_cont.scrollHeight;
 }
 
+function check_intro(e) {
+    if (e.keyCode == 13) {
+        if (!e.shiftKey) {
+            next_btn();
+        }
+    }
+}
+
 function begin_btn() {
     var json = document.getElementById('input').value;
 
@@ -61,6 +72,8 @@ function begin_btn() {
         keys = Object.keys(phrases);
         set_phrase();
         switch_visible();
+        document.getElementById('begin_bt').style.display = "none";
+        document.getElementById('next_bt').style.display = "block";
     } else {
         console.log('[FAIL] Thre is no json text in the input.');
     }
@@ -68,6 +81,8 @@ function begin_btn() {
 
 function return_btn() {
     switch_visible();
+    document.getElementById('continue_bt').style.display = "block";
+    document.getElementById('next_bt').style.display = "none";
 }
 
 function next_btn() {
@@ -77,8 +92,6 @@ function next_btn() {
     result[keys[iterator]] = new_text_cont.value.replace(/\n$/, "");
     new_text_cont.value = "";
     new_text_cont.focus();
-
-    //cambiar next por end antes del último paso, y luego que desaparezca.
 
     iterator++;
 
@@ -90,8 +103,8 @@ function next_btn() {
     } else if (iterator == keys.length) {
         var output_cont = document.getElementById('output');
         console.log('[INFO] Fin');
-        // next_bt.innerText = "ENDED!!";
-        // next_bt.style.cursor = "default";
+        next_bt.innerText = "ENDED!!"; //este cambio es inutil porquees invisible
+        next_bt.style.cursor = "default"; //este cambio es inutil porquees invisible
         next_bt.style.display = "none";
         output_cont.value = JSON.stringify(result, null, 4);
     }
@@ -113,10 +126,8 @@ function copy_btn() {
     document.getElementById('new_text').focus();
 }
 
-function check_intro(e) {
-    if (e.keyCode == 13) {
-        if (!e.shiftKey) {
-            next_btn();
-        }
-    }
+function continue_btn() {
+    switch_visible();
+    document.getElementById('continue_bt').style.display = "none";
+    (iterator < keys.length)?document.getElementById('next_bt').style.display = "block":0;
 }
