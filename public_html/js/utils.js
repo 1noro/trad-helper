@@ -91,6 +91,7 @@ function begin_btn() {
         input_cont.parentNode.style.background = "none";
         begin_btn_gchanges();
         document.getElementById('input').readOnly = true;
+        document.getElementById('new_text').focus();
     } else {
         console.log('[FAIL] Thre is no JSON text in the input.');
         input_cont.style.color = "#ffffff";
@@ -167,9 +168,13 @@ function copy_down_btn() {
 /*############################################################################*/
 function check_intro(e) {
     if (e.keyCode == 13) {
-        if (!e.shiftKey) {
+        if (e.ctrlKey) {
+            console.log('hola');
+            copy_down_btn();
             next_btn();
-        }
+        } else if (!e.shiftKey) {
+            next_btn();
+        } 
     }
 }
 
