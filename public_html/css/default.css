@@ -7,6 +7,12 @@ body {
     font-family: "My Courier New", "Courier New";
     /* background-color: #cbcbcb; */
     background-color: #ffffff;
+    color: #3c3c3c;
+}
+
+textarea {
+    background: none;
+    color: #3c3c3c;
 }
 
 /*############################################################################*/

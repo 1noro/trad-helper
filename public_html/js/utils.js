@@ -85,17 +85,24 @@ function continue_btn_gchanges() {
 
 /*############################################################################*/
 function begin_btn() {
-    var json = document.getElementById('input').value;
+    var
+        input_cont = document.getElementById('input'),
+        json = input_cont.value;
 
     if (is_json_string(json)) {
         phrases = JSON.parse(json)['english'];
         keys = Object.keys(phrases);
         result["espanol"] = {};
         set_phrase();
+
+        input_cont.style.color = "#3c3c3c";
+        input_cont.parentNode.style.background = "none";
         begin_btn_gchanges();
         document.getElementById('input').readOnly = true;
     } else {
         console.log('[FAIL] Thre is no JSON text in the input.');
+        input_cont.style.color = "#ffffff";
+        input_cont.parentNode.style.backgroundColor = "#d13f3f";
     }
 }
 
@@ -114,24 +121,35 @@ function next_btn() {
     var
         new_text_cont = document.getElementById('new_text'),
         next_bt = document.getElementById('next_bt'),
-        new_text = new_text_cont.value.replace(/\n$/, "");
-    result["espanol"][keys[iterator]] = new_text;
-    new_text_cont.value = "";
-    new_text_cont.focus();
-    console.log("[ ++ ] "+keys[iterator]+": "+new_text);
+        new_text = new_text_cont.value.replace(/\n$/, ""),
+        output_cont = document.getElementById('output');
 
-    iterator++;
+    if (is_json_string(output_cont.value)) {
+        result = JSON.parse(output_cont.value);
+        result["espanol"][keys[iterator]] = new_text;
 
-    if (iterator < keys.length) {
-        set_phrase();
-        if ((iterator+1) == keys.length) {
-            next_bt.innerText = "END";
+        output_cont.style.color = "#3c3c3c";
+        output_cont.parentNode.style.background = "none";
+        new_text_cont.value = "";
+        new_text_cont.focus();
+        console.log("[ ++ ] "+keys[iterator]+": "+new_text);
+
+        iterator++;
+
+        if (iterator < keys.length) {
+            set_phrase();
+            if ((iterator+1) == keys.length) {
+                next_bt.innerText = "END";
+            }
+        } else if (iterator == keys.length) {
+            console.log('[INFO] End.');
+            end_btn_gchanges();
+            output_cont.value = JSON.stringify(result, null, 4);
         }
-    } else if (iterator == keys.length) {
-        var output_cont = document.getElementById('output');
-        console.log('[INFO] End.');
-        end_btn_gchanges();
-        output_cont.value = JSON.stringify(result, null, 4);
+    } else {
+        console.log('[FAIL] Thre is no JSON text in the output.');
+        output_cont.style.color = "#ffffff";
+        output_cont.parentNode.style.backgroundColor = "#d13f3f";
     }
 }
 
